@@ -1,14 +1,17 @@
-﻿using UnityEngine;
+﻿using Events;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public LayerMask layerHookeable;
+    public GameObject prefabExplosion;
 
     private Camera _camera;
     private TargetJoint2D _targetJoint2D;
     private LineRenderer _lineRenderer;
 
     private Enemy _currentEnemy;
+    private GameOverEvent _gameOverEvent = new GameOverEvent();
 
     private void Awake()
     {
@@ -20,6 +23,16 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         _targetJoint2D.enabled = false;
+    }
+
+    private void OnEnable()
+    {
+        EventController.AddListener<GameOverEvent>(GameOver);
+    }
+
+    private void OnDisable()
+    {
+        EventController.RemoveListener<GameOverEvent>(GameOver);
     }
 
     private void Update()
@@ -66,5 +79,11 @@ public class PlayerController : MonoBehaviour
         }
 
         return null;
+    }
+
+    private void GameOver(GameOverEvent evt)
+    {
+        Instantiate(prefabExplosion, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Events;
+using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
@@ -8,8 +9,10 @@ public class Enemy : MonoBehaviour
     public Sprite spriteOff;
 
     private string _tagPlayer = "Player";
+    private string _tagEnemy = "Enemy";
 
     private SpriteRenderer _spriteRenderer;
+    private GameOverEvent _gameOverEvent = new GameOverEvent();
 
     private void Awake()
     {
@@ -32,7 +35,12 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.CompareTag(_tagPlayer) && currentState)
         {
-            Debug.Log($"<b> DESTROY </b>");
+            EventController.TriggerEvent(_gameOverEvent);
+        }
+
+        if (other.gameObject.CompareTag(_tagEnemy))
+        {
+            Destroy(other.gameObject);
         }
     }
 
