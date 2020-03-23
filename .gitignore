@@ -1,7 +1,20 @@
-# This .gitignore file should be placed at the root of your Unity project directory
-#
-# Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
-#
+# Created by Mariano Sosa
+
+### Unity ###
+.vs/
+[Bb]uild/
+[Ll]ibrary/
+[Ll]ogs
+[Oo]bj/
+[Pp]ackages/
+[Tt]emp/
+*/.vs/
+*/[Bb]uild/
+*/[Ll]ibrary/
+*/[Ll]ogs
+*/[Oo]bj/
+*/[Pp]ackages/
+*/[Tt]emp/
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -58,3 +71,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# Custom
+Assembly-CSharp.csproj
+Assembly-CSharp-vs.csproj
